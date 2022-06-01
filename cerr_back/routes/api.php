@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/gerencia/clientes',[ClientController::class, 'getAll']);
+
+Route::get('/gerencia/partesTrabajo', [ParteTrabajoController::class, 'getAll']);
