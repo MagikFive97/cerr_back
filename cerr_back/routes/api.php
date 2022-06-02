@@ -18,7 +18,19 @@ use App\Http\Controllers\ClientController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::prefix('gerencia')->group(function () {
+    Route::prefix('clientes')->group(function () {
 
-Route::get('/gerencia/clientes',[ClientController::class, 'getAll']);
+    Route::get('',[ClientController::class, 'getAll']);
 
-Route::get('/gerencia/partesTrabajo', [ParteTrabajoController::class, 'getAll']);
+    Route::get('{id}', [ClientController::class, 'getId']);
+
+    Route::post('', [ClientController::class, 'crearCliente']);
+
+    Route::delete('{id}/delete', [ClientController::class , 'deleteCliente']);
+
+    Route::post('{id}/editar', [ClientController::class, 'editarCliente']);
+
+    });
+    Route::get('partesTrabajo', [ParteTrabajoController::class, 'getAll']);
+});

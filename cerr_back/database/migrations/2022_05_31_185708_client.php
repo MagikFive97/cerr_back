@@ -16,7 +16,7 @@ class Client extends Migration
         Schema::create('client', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre');
-            $table->string('DNI/NIE');
+            $table->string('Dni');
             $table->string('Email');
             $table->string('Razon_Social');
             $table->string('Telefono');
@@ -25,7 +25,7 @@ class Client extends Migration
             $table->string('Localidad');
             $table->string('Provincia');
             $table->string('Observaciones');
-            $table->decimal('Beneficio', 5,2);
+            $table->decimal('Beneficio');
         });
     }
 
