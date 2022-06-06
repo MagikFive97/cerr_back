@@ -10,7 +10,7 @@ class client extends Model
     use HasFactory;
     protected $fillable = [
         'Nombre',
-        'DNI/NIE',
+        'Dni',
         'Email',
         'Razon_Social',
         'Telefono',
@@ -26,5 +26,5 @@ class client extends Model
         'updated_at',
     ];
 
-    
+
 }
