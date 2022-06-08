@@ -17,7 +17,7 @@ class parte_trabajo extends Model
         'Observaciones',
         'Adjuntos',
         'Horas_montaje',
-        'Horas_taller',
+        'Horas_totales',
     ];
     protected $hidden = [
         'created_at',
