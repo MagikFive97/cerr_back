@@ -11,26 +11,33 @@ class passportAuthController extends Controller
 {
     public function authenticate(Request $request)
     {
+
         $validation = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         if (Auth::check()) {
+
               return  response()->json([
                  'message' => 'Ya estabas logueado',
                  'access_token' => $token,
                  'token_type' => 'Bearer',
                  'success' => true]);
+
         }
 
         if (Auth::attempt($validation)) {
             $token = Auth::user()->createToken('AuthTokenLogin')->accessToken;
+
             return response()->json([
                 'message' => 'Se ha logueado correctamente',
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'success' => true]);
+                'success' => true,
+                'rol' => Auth::user()->rol,
+           ]);
+
         }
         return response()->json([
             'error' => 'No autorizado',
@@ -53,12 +60,14 @@ class passportAuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
+            'rol' => 'required',
         ]);
 
         $user = User::create($request->only([
             'name',
             'email',
             'password',
+            'rol'
         ]));
 
         $token = $user->createToken($user->name)->accessToken;
@@ -81,4 +90,5 @@ class passportAuthController extends Controller
             'success' => true
         ], 401);
     }
+
 }

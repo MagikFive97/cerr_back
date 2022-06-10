@@ -25,18 +25,17 @@ class ParteTrabajoController extends Controller
             }
 
         public function crearParte(Request $request){
-            $datos = $request->only(['Cliente','Fecha','Descripcion','Materiales','Observaciones','Adjuntos','Horas_montaje','Horas_totales','Firma_trabajador','Firma_cliente']);
+            $datos = $request->only(['Cliente','Fecha','Descripcion','Materiales','Observaciones','Horas_montaje','Horas_totales','Firma_trabajador','Firma_cliente']);
             $request->validate([
                 'Cliente'=>'max:32',
                 'Fecha'=>'nullable',
                 'Descripcion'=>'max:200|nullable',
                 'Materiales'=>'max:200|nullable',
                 'Observaciones'=>'max:200|nullable',
-                'Adjuntos'=>'max:24',
-                'Horas_montaje' => 'max:5',
-                'Horas_totales' => 'max:5',
-                'Firma_trabajador' => 'max:4',
-                'Firma_cliente' => 'max:4'
+                 'Horas_montaje' => '',
+                 'Horas_totales' => '',
+                 'Firma_trabajador' => '',
+                 'Firma_cliente' => '',
             ]);
              try{
                         DB::table('parte_trabajo')->insert($datos);
@@ -63,18 +62,17 @@ class ParteTrabajoController extends Controller
             }
 
             public function editarParte(Request $request , $id){
-                    $datos = $request->only(['Cliente','Fecha','Descripcion','Materiales','Observaciones','Adjuntos','Horas_montaje','Horas_totales','Firma_trabajador','Firma_cliente']);
+                    $datos = $request->only(['Cliente','Fecha','Descripcion','Materiales','Observaciones','Horas_montaje','Horas_totales','Firma_trabajador','Firma_cliente']);
                     $request->validate([
                             'Cliente'=>'max:32',
-                            'Fecha'=>'max:9|nullable',
+                            'Fecha' => 'nullable',
                             'Descripcion'=>'max:200|nullable',
                             'Materiales'=>'max:200|nullable',
                             'Observaciones'=>'max:200|nullable',
-                            'Adjuntos'=>'max:24',
-                            'Horas_montaje' => 'max:5',
-                            'Horas_totales' => 'max:5',
-                            'Firma_trabajador' => 'max:4',
-                            'Firma_cliente' => 'max:4'
+                            'Horas_montaje' => '',
+                            'Horas_totales' => '',
+                            'Firma_trabajador' => '',
+                            'Firma_cliente' => '',
                     ]);
                     try{
                         DB::table('parte_trabajo')->where('id',$id)->update($datos);
@@ -82,5 +80,10 @@ class ParteTrabajoController extends Controller
                         return "error $e";
                     }
                 }
+             public function imprimir(Request $request , $id){
+                    $client =  DB::table('parte_trabajo')->get()->where('id',$id);
 
+                     $pdf = \PDF::loadView('pdf' , compact('client'));
+                     return $pdf->download('ejemplo.pdf');
+             }
 }
