@@ -19,7 +19,6 @@ class CreateParteTrabajoTable extends Migration
             $table->date('Fecha');
             $table->string('Descripcion');
             $table->string('Materiales');
-            $table->string('Adjuntos');
             $table->string('Observaciones');
             $table->double('Horas_montaje', 5,2);
             $table->double('Horas_totales', 5,2);

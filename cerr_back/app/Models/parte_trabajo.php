@@ -15,7 +15,6 @@ class parte_trabajo extends Model
         'Descripcion',
         'Materiales',
         'Observaciones',
-        'Adjuntos',
         'Horas_montaje',
         'Horas_totales',
     ];

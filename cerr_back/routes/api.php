@@ -57,8 +57,9 @@ Route::group(['middleware' => 'auth:api'], function() {
             Route::post('', [ParteTrabajoController::class, 'crearParte']);
             Route::delete('{id}/delete', [ParteTrabajoController::class , 'deleteParte']);
             Route::post('{id}/editar', [ParteTrabajoController::class, 'editarParte']);
+
         });
     });
 });
-
+ Route::get('{id}/imprimir-pdf',[ParteTrabajoController::class , 'imprimir']);
 
