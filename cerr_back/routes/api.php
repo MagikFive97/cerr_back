@@ -61,5 +61,6 @@ Route::group(['middleware' => 'auth:api'], function() {
         });
     });
 });
+
  Route::get('{id}/imprimir-pdf',[ParteTrabajoController::class , 'imprimir']);
 
